@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: d3khan-blog
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn d3khan_blog.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: WEB_CONCURRENCY
+        value: 4
