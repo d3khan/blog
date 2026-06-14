@@ -1,0 +1,90 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Submit a Post - D3Khan Blog{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+  <div class="form-header">
+    <div class="form-header-top"></div>
+    <div class="form-header-content">
+      <h1>Submit a Blog Post</h1>
+      <p class="form-subtitle">Share your thoughts with the community. All fields marked with * are required.</p>
+    </div>
+  </div>
+
+  <form method="post" class="google-form" novalidate>
+    {% csrf_token %}
+
+    <div class="form-section">
+      <div class="form-field">
+        <label for="id_title" class="field-label">
+          Post Title <span class="required">*</span>
+        </label>
+        <div class="field-help">Give your post a clear, descriptive title</div>
+        {{ form.title }}
+        {% if form.title.errors %}
+          <div class="field-error">{{ form.title.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_content" class="field-label">
+          Post Content <span class="required">*</span>
+        </label>
+        <div class="field-help">Write your full post content here</div>
+        {{ form.content }}
+        {% if form.content.errors %}
+          <div class="field-error">{{ form.content.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_author" class="field-label">
+          Author Name
+        </label>
+        <div class="field-help">How should we credit you? (optional)</div>
+        {{ form.author }}
+        {% if form.author.errors %}
+          <div class="field-error">{{ form.author.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_category" class="field-label">
+          Category
+        </label>
+        <div class="field-help">e.g. Tutorial, Tech, Life, Opinion (optional)</div>
+        {{ form.category }}
+        {% if form.category.errors %}
+          <div class="field-error">{{ form.category.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="id_email" class="field-label">
+          Email Address
+        </label>
+        <div class="field-help">We will not share your email publicly (optional)</div>
+        {{ form.email }}
+        {% if form.email.errors %}
+          <div class="field-error">{{ form.email.errors.0 }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7"/>
+        </svg>
+        Submit Post
+      </button>
+      <a href="{% url 'home' %}" class="cancel-btn">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
